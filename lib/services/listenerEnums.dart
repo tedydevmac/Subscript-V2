@@ -1,0 +1,3 @@
+enum SubscriptStream {
+  refreshSubs
+}
