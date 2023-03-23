@@ -17,7 +17,6 @@ class SignInPage extends StatelessWidget {
     final firebaseCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     if (firebaseCredential.user == null) return;
-
     uid = firebaseCredential.user!.uid;
     profilePicURL = googleUser?.photoUrl ?? "";
     navigator.push(MaterialPageRoute(builder: (context) => const HomePage()));
@@ -37,14 +36,14 @@ class SignInPage extends StatelessWidget {
               children: [
                 Material(
                   shadowColor: Colors.grey,
-                  elevation: 2,
+                  elevation: 2.3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(18),
                     child: Image.asset(
-                      "icon/logo.png",
+                      "icon/ic_launcher.png",
                       height: 200,
                       width: 200,
                     ),
@@ -61,10 +60,10 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "Your subscriptions in one place",
+                  "Your subscriptions all in one place",
                   style: TextStyle(
                     fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(
@@ -87,6 +86,5 @@ class SignInPage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

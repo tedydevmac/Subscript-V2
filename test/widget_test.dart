@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:subscript/main.dart';
 import 'package:subscript/pages/homepage.dart';
 
 void main() {

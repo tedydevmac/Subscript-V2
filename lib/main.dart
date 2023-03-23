@@ -32,6 +32,7 @@ final darkFilledButtonStyle = ElevatedButton.styleFrom(
 }));
 
 late final String uid;
+// ignore: non_constant_identifier_names
 final List<Subscription> Subscripts = [];
 String profilePicURL = "";
 final subStreamController = StreamController<SubscriptStream>.broadcast();
