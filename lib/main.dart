@@ -9,7 +9,6 @@ import 'package:subscript/pages/signinpage.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'dart:async';
 
-
 final lightTheme = ThemeData.light(useMaterial3: true);
 final filledButtonStyle = ElevatedButton.styleFrom(
         backgroundColor: lightTheme.colorScheme.primary,
@@ -34,6 +33,7 @@ final darkFilledButtonStyle = ElevatedButton.styleFrom(
 
 late final String uid;
 final List<Subscription> Subscripts = [];
+String profilePicURL = "";
 final subStreamController = StreamController<SubscriptStream>.broadcast();
 
 /// Feedback:

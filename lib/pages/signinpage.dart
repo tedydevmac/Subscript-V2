@@ -19,6 +19,7 @@ class SignInPage extends StatelessWidget {
     if (firebaseCredential.user == null) return;
 
     uid = firebaseCredential.user!.uid;
+    profilePicURL = googleUser?.photoUrl ?? "";
     navigator.push(MaterialPageRoute(builder: (context) => const HomePage()));
   }
 
@@ -60,7 +61,7 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "Easy subscription management ",
+                  "Your subscriptions in one place",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

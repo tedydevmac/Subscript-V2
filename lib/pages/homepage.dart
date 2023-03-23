@@ -76,11 +76,31 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [Text("My Subscriptions")],
+            children: [
+              SizedBox(
+                width: 45,
+                height: 45,
+                child: CircleAvatar(
+                  radius: 25.0,
+                  backgroundImage: NetworkImage(
+                    profilePicURL == ""
+                        ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        : profilePicURL,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text(
+                "My Subscriptions",
+                style: TextStyle(fontSize: 20),
+              )
+            ],
           ),
         ),
         body: SafeArea(
-          top: false,
+          top: true,
           child: isLoading
               ? const Center(
                   child: SizedBox(
@@ -91,24 +111,19 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 )
-              : ListView(
-                  children: [
-                    ListView.separated(
-                      separatorBuilder: (separatorContext, index) =>
-                          const Divider(
-                        color: Colors.grey,
-                        thickness: 0.4,
-                        height: 1,
-                      ),
-                      itemBuilder: (context, index) {
+              : Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 30, 0, 0),
+                  child: SizedBox(
+                    height: 500,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: Subscripts.length,
+                      itemBuilder: (BuildContext context, int index) {
                         final eachSub = Subscripts[index];
                         return SubItem(subscribe: eachSub);
                       },
-                      itemCount: Subscripts.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                    )
-                  ],
+                    ),
+                  ),
                 ),
         ),
       ),
