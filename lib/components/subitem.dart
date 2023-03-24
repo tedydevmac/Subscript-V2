@@ -24,6 +24,7 @@ class SubItem extends StatefulWidget {
 
 class _SubItemState extends State<SubItem> {
   bool isEdit = false;
+  var isLoading2 = false;
   var isLoading = false;
   String? currencyValue = "None selected";
   String? freqValue = "None selected";
@@ -73,9 +74,9 @@ class _SubItemState extends State<SubItem> {
           return Container(
             height: 400,
             width: 400,
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
             child: Card(
-              elevation: 7.25,
+              elevation: 6.3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -330,6 +331,61 @@ class _SubItemState extends State<SubItem> {
                               label: widget.subscribe.isReminded
                                   ? const Text("Added")
                                   : const Text("Set reminder"),
+                            ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          if (isEdit == false)
+                            FloatingActionButton(
+                              onPressed: () async {
+                                late bool confirmCheck;
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                          "Are you sure you want to delete this subcription?"),
+                                      content: const Text(
+                                          "Please confirm deletion."),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            confirmCheck = true;
+                                            Navigator.pop(dialogContext);
+                                          },
+                                          child: const Text("Confirm"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            confirmCheck = false;
+                                            Navigator.pop(dialogContext);
+                                          },
+                                          child: const Text("Cancel"),
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                                if (confirmCheck == false) return;
+                                setState(() {
+                                  isLoading2 = true;
+                                });
+                                await widget.subscribe.deleteSub();
+                                Subscripts.remove(widget.subscribe);
+                                subStreamController
+                                    .add(SubscriptStream.refreshSubs);
+                                setState(() {
+                                  isLoading2 = false;
+                                });
+                              },
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              child: isLoading2
+                                  ? const CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    )
+                                  : const Icon(
+                                      Icons.delete,
+                                    ),
                             ),
                           const SizedBox(
                             width: 10,
