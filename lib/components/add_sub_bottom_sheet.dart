@@ -18,11 +18,11 @@ class _AddSubBottomSheetState extends State<AddSubBottomSheet> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final moneyController = TextEditingController();
-  var currencyDropdownValue = "None selected";
-  var freqDropdownValue = "None selected";
+  String currencyDropdownValue = "None selected";
+  String freqDropdownValue = "None selected";
   late String currency;
   DateTime? dueDate;
-  var isLoading = false;
+  bool isLoading = false;
 
   Future<void> pickDate() async {
     final newDueDate = await DatePicker.showDateTimePicker(
